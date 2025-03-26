@@ -41,7 +41,7 @@ async function LoginPage() {
                                     placeholder="hello@example.com"
                                 />
                             </div>
-                            <SubmitButtons />
+                            <SubmitButtons text="Login" />
                         </form>
                     </CardContent>
                 </Card>

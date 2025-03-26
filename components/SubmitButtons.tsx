@@ -5,7 +5,12 @@ import { useFormStatus } from 'react-dom'
 import { Button } from './ui/button'
 import { Loader2 } from 'lucide-react'
 
-const SubmitButtons = () => {
+interface Props {
+    text: string
+}
+
+
+const SubmitButtons = ({ text = "Submit" }: Props) => {
     const { pending } = useFormStatus()
     return (
         <>
@@ -15,8 +20,8 @@ const SubmitButtons = () => {
                     Please wait
                 </Button>
             ) :
-                <Button type="submit" className='w-full'>
-                    Submit
+                <Button type="submit" className='w-full cursor-pointer'>
+                    {text}
                 </Button>
             }
         </>
