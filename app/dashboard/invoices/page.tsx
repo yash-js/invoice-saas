@@ -17,7 +17,7 @@ function InvoicesPage() {
                             Manage your invoices right here
                         </CardDescription>
                     </div>
-                    <Link className={buttonVariants()} href={'/dashboard/invoices/new'}>
+                    <Link className={buttonVariants()} href={'/dashboard/invoices/create'}>
                         <Plus /> Create invoice
                     </Link>
                 </div>

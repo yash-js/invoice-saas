@@ -8,6 +8,7 @@ import { onboardUser } from "../actions";
 import { useForm } from '@conform-to/react'
 import { parseWithZod } from "@conform-to/zod";
 import { onboardingSchema } from "../utils/zodSchemas";
+import ErrorMessage from "@/components/ErrorMessage";
 
 function OnboardingPage() {
     const [lastResult, action] = useActionState(onboardUser, undefined)
@@ -55,7 +56,7 @@ function OnboardingPage() {
                                     defaultValue={fields.firstName.initialValue}
                                     placeholder="John"
                                 />
-                                <p className="text-xs text-red-500">{fields.firstName.errors}</p>
+                                <ErrorMessage error={fields.firstName.errors} />
                             </div>
                             <div className="grid gap-2">
                                 <Label>
@@ -68,7 +69,8 @@ function OnboardingPage() {
                                     defaultValue={fields.lastName.initialValue}
                                     placeholder="Doe"
                                 />
-                                <p className="text-xs text-red-500">{fields.lastName.errors}</p>
+
+                                <ErrorMessage error={fields.lastName.errors} />
                             </div>
                         </div>
                         <div className="grid gap-2">
@@ -82,7 +84,7 @@ function OnboardingPage() {
                                 defaultValue={fields.address.initialValue}
                                 placeholder="123 Main Street"
                             />
-                            <p className="text-xs text-red-500">{fields.address.errors}</p>
+                            <ErrorMessage error={fields.address.errors} />
                         </div>
 
                         <SubmitButtons text="Finish onboarding" />
