@@ -8,11 +8,12 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 
 interface Props {
-    id: string
+    id: string,
+    status: string
 }
 
 
-const InvoiceActions = ({ id }: Props) => {
+const InvoiceActions = ({ id, status }: Props) => {
 
     const handleSendReminder = async (id: string) => {
         toast.promise(fetch(`/api/email/${id}`, {
@@ -47,15 +48,17 @@ const InvoiceActions = ({ id }: Props) => {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleSendReminder(id)}>
-                        <Mail className='size-4 mr-2' />
-                        Reminder Email
+                    <Mail className='size-4 mr-2' />
+                    Reminder Email
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild   >
-                    <Link href={''}>
+                {status != 'PAID' ? <DropdownMenuItem asChild   >
+                    <Link href={`/dashboard/invoices/${id}/paid`}>
                         <CheckCircle className='size-4 mr-2' />
                         Mark as Paid
                     </Link>
                 </DropdownMenuItem>
+                    : null
+                }
                 <DropdownMenuItem asChild   >
                     <Link href={`/dashboard/invoices/${id}/delete`}>
                         <Trash className='size-4 mr-2' />
