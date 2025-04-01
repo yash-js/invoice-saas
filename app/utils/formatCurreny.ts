@@ -4,3 +4,13 @@ export function formatCurrency(amount: number, currency: string) {
         currency: currency,
     }).format(amount)
 }
+
+const currencies: Record<string, string> = {
+    INR: 'Rs.',
+    USD: '$',
+    EUR: '€'
+}
+
+export function getCurrencySymbol(currency: string) {
+    return currencies[currency]
+}

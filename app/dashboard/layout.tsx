@@ -9,6 +9,7 @@ import { requireUser } from "../utils/hooks";
 import { signOut } from "../utils/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -41,7 +42,12 @@ async function DashboardLayout({ children }: { children: React.ReactNode }) {
 
     return (
         <>
-
+            <Toaster
+                richColors
+                closeButton
+                position="top-right"
+                theme="light"
+            />
             <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
                 <div className="hidden border-r bg-muted/40 md:block">
                     <div className="flex flex-col max-h-screen h-full gap-2">

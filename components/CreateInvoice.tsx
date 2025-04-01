@@ -19,7 +19,16 @@ import { invoiceSchema } from '@/app/utils/zodSchemas'
 import ErrorMessage from './ErrorMessage'
 import { formatCurrency } from '@/app/utils/formatCurreny'
 
-const CreateInvoice = () => {
+interface CreateInvoiceProps {
+  firstName: string;
+  lastName: string;
+  address: string;
+  email: string
+}
+
+
+const CreateInvoice = ({ address, email, firstName, lastName }: CreateInvoiceProps) => {
+
   const [lastResult, action] = useActionState(createInvoice, undefined)
   const [form, fields] = useForm({
     lastResult,
@@ -118,13 +127,13 @@ const CreateInvoice = () => {
                 From
               </Label>
               <div className="space-y-2">
-                <Input name={fields.fromName.name} key={fields.fromName.key} placeholder='Your name' />
+                <Input name={fields.fromName.name} key={fields.fromName.key} defaultValue={firstName + " " + lastName} placeholder='Your name' />
                 <ErrorMessage error={fields.fromName.errors} />
 
-                <Input name={fields.fromEmail.name} key={fields.fromEmail.key} placeholder='Your Email' />
+                <Input name={fields.fromEmail.name} key={fields.fromEmail.key} defaultValue={email} placeholder='Your Email' />
                 <ErrorMessage error={fields.fromEmail.errors} />
 
-                <Input name={fields.fromAddress.name} key={fields.fromAddress.key} placeholder='Your Address' />
+                <Input name={fields.fromAddress.name} key={fields.fromAddress.key} defaultValue={address} placeholder='Your Address' />
                 <ErrorMessage error={fields.fromAddress.errors} />
               </div>
             </div>

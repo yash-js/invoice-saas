@@ -1,10 +1,31 @@
+'use client'
+
 import React from 'react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Button } from './ui/button'
 import { CheckCircle, DownloadCloud, Mail, MoreHorizontal, Pencil, Trash } from 'lucide-react'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
-const InvoiceActions = () => {
+interface Props {
+    id: string
+}
+
+
+const InvoiceActions = ({ id }: Props) => {
+
+    const handleSendReminder = async (id: string) => {
+        toast.promise(fetch(`/api/email/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }), {
+            loading: "Sending Reminder",
+            success: "Reminder Email Sent",
+            error: "Failed to send reminder!"
+        })
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -14,22 +35,20 @@ const InvoiceActions = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align='end'>
                 <DropdownMenuItem asChild   >
-                    <Link href={''}>
+                    <Link href={`/dashboard/invoices/${id}`}>
                         <Pencil className='size-4 mr-2' />
                         Edit Invoice
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild   >
-                    <Link href={''}>
+                    <Link target='_blank' href={`/api/invoice/${id}`}>
                         <DownloadCloud className='size-4 mr-2' />
                         Download Invoice
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild   >
-                    <Link href={''}>
+                <DropdownMenuItem onClick={() => handleSendReminder(id)}>
                         <Mail className='size-4 mr-2' />
                         Reminder Email
-                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild   >
                     <Link href={''}>
