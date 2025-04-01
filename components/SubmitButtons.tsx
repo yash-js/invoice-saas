@@ -6,21 +6,22 @@ import { Button } from './ui/button'
 import { Loader2 } from 'lucide-react'
 
 interface Props {
-    text: string
+    text: string,
+    variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined
 }
 
 
-const SubmitButtons = ({ text = "Submit" }: Props) => {
+const SubmitButtons = ({ text = "Submit", variant = "default" }: Props) => {
     const { pending } = useFormStatus()
     return (
         <>
             {pending ? (
-                <Button disabled className='w-full'>
+                <Button variant={variant} disabled className='w-full'>
                     <Loader2 className="mr-2 size-4 animate-spin" />
                     Please wait
                 </Button>
             ) :
-                <Button type="submit" className='w-full cursor-pointer'>
+                <Button variant={variant} type="submit" className='w-full cursor-pointer'>
                     {text}
                 </Button>
             }
