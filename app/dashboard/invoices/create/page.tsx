@@ -3,6 +3,7 @@ import CreateInvoice from "@/components/CreateInvoice";
 import { prisma } from "@/lib/prisma";
 
 async function getUserData(userId: string) {
+    await new Promise((resolve) => setTimeout(resolve, 5000))
     const data = await prisma.user.findUnique({
         where: {
             id: userId

@@ -15,43 +15,34 @@ const Graph = ({ data }: Props) => {
 
 
     return (
-        <ChartContainer config={{
-            amount: {
-                label: "Amount",
-                color: "var(--primary)",
-            }
-        }}>
-            <AreaChart
-                accessibilityLayer
-                data={data}
-                margin={{
-                    left: 12,
-                    right: 12,
-                }}
-            >
-                <CartesianGrid vertical={false} />
-                <XAxis
-                    dataKey="date"
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={8}
-                    tickFormatter={(value) => value.slice(0, 3)}
-                />
-                <ChartTooltip
-                    cursor={false}
-                    content={<ChartTooltipContent indicator="line" />}
-                />
-                <Area
-                    dataKey="amount"
-                    type="natural"
-                    fill="var(--color-desktop)"
-                    fillOpacity={0.4}
-                    stroke="var(--color-desktop)"
-                />
-            </AreaChart>
-        </ChartContainer>
-    );
+        <ChartContainer
+            config={{
+                amount: {
+                    label: "Amount",
+                    color: "var(--primary)",
+                }
+            }}
+            className="min-h-[300px]"
+        >
+            <ResponsiveContainer width={'100%'} height={'100%'}>
+                <LineChart data={data}>
+                    <XAxis dataKey={"date"} />
+                    <YAxis />
+                    <ChartTooltip
+                        content={<ChartTooltipContent indicator="line" />}
 
+                    />
+                    <Line
+                        type={'monotone'}
+                        dataKey={'amount'}
+                        stroke="var(--color-amount)"
+                        strokeWidth={2}
+
+                    />
+                </LineChart>
+            </ResponsiveContainer>
+        </ChartContainer>
+    )
 }
 
 export default Graph

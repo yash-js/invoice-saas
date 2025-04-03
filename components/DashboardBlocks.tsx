@@ -2,6 +2,7 @@ import { Activity, CreditCard, DollarSign, Users } from "lucide-react"
 import DashboardCard from "./DashboardCard"
 import { prisma } from "@/lib/prisma"
 import { requireUser } from "@/app/utils/hooks"
+import { formatCurrency } from "@/app/utils/formatCurreny"
 
 
 
@@ -56,8 +57,8 @@ const DashboardBlocks = async () => {
             <DashboardCard
                 Icon={DollarSign}
                 title="Total Revenue"
-                stat={data.reduce((acc, invoice) => acc + invoice.total, 0)}
-                description="Based on last 30 days"
+                stat={formatCurrency(data.reduce((a, b) => a + b.total, 0), 'INR')}
+                description="Based on total volume"
             />
             <DashboardCard
                 Icon={Users}
