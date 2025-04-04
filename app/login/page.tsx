@@ -1,9 +1,12 @@
 
 import { auth, signIn } from "@/app/utils/auth";
 import SubmitButtons from "@/components/SubmitButtons";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function LoginPage() {
@@ -43,6 +46,9 @@ async function LoginPage() {
                             </div>
                             <SubmitButtons text="Login" />
                         </form>
+                        <Link href={'/'} className={buttonVariants({ className: 'w-full mt-4', variant: 'outline' })}>
+                            <ArrowLeft className='size-4 mr-2' /> Go back!
+                        </Link>
                     </CardContent>
                 </Card>
 
